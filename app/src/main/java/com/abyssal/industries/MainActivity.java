@@ -26,7 +26,9 @@ public class MainActivity extends Activity {
         s.setJavaScriptEnabled(true);
         s.setDomStorageEnabled(true);              // game saves use localStorage
         s.setMediaPlaybackRequiresUserGesture(false);
-        s.setSupportZoom(false);
+        s.setSupportZoom(false);                   // the game handles its own pinch gestures
+        s.setBuiltInZoomControls(false);
+        s.setDisplayZoomControls(false);
 
         // Serve bundled files from a stable https origin so saves persist between launches.
         final WebViewAssetLoader loader = new WebViewAssetLoader.Builder()
