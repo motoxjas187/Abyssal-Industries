@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
@@ -40,6 +41,7 @@ public class MainActivity extends Activity {
                 return loader.shouldInterceptRequest(r.getUrl());
             }
         });
+        web.addJavascriptInterface(new Bridge(), "AbyssalApp");   // lets the game's Quit button close the app
         web.loadUrl("https://appassets.androidplatform.net/assets/index.html");
     }
 
@@ -60,6 +62,11 @@ public class MainActivity extends Activity {
         web.evaluateJavascript(
                 "(function(){try{if(started&&!paused&&!over){document.getElementById('mnb').click();return 1}}catch(e){}return 0})()",
                 v -> { if (!"1".equals(v)) finish(); });
+    }
+
+    private class Bridge {
+        @JavascriptInterface
+        public void quit() { runOnUiThread(() -> finishAndRemoveTask()); }
     }
 
     @Override protected void onPause() { super.onPause(); web.onPause(); }

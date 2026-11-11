@@ -6,8 +6,8 @@ android {
         applicationId 'com.abyssal.industries'
         minSdk 26
         targetSdk 34
-        versionCode 26
-        versionName '0.26'
+        versionCode 27
+        versionName '0.27'
     }
     // One fixed TEST key so every build installs over the last one.
     // Not for the Play Store: the release key must stay private.
